@@ -1,3 +1,28 @@
-<div>{{users}}</div>
+<!-- <div>{{users}}</div>
 <div>{{jackpots}}</div>
 <div>{{play}}</div>
+<div>{{play_list}}</div> -->
+<!Doctype html>
+<html>
+<head>
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+</head>
+<body>
+<div class="play-list-container">
+	{% for p in play_list%}
+		<div class="row">
+			<div>{{p.name}}</div>
+			<div>{{p.luck}}</div>
+		</div>
+	{% endfor %}
+</div>
+<form action="/" method="post">
+	<select name="id">
+		{% for u in users%}
+		<option value="{{u.id}}">{{u.name}}</option>
+		{% endfor %}
+	</select>
+	<input type="submit" value="Donate">
+</form>
+</body>
+</html>
