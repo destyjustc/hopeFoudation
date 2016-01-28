@@ -6,23 +6,66 @@
 <html>
 <head>
 	<link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/semantic.min.css') }}">
+	<script type="text/javascript" src="{{ url_for('static', filename='js/semantic.min.js') }}"></script>
 </head>
 <body>
+<div class="row">
+	<div class="col-md-6">
+		<div id="max-jackpot" class="next_draw_info parbase lottomax">
+		    <div class="draw_text">
+				<img src="{{ url_for('static', filename='files/lotto-max-jackpot-logo.png') }}" alt="Lotto MAX" class="logo">
+		       
+				<h2>Friday's Jackpot</h2>
+		        <div class="dyn" data-tba="TBA">
+		        	<div class="jackpot">${{jackpots[0].million}} Million <span class="est">EST.</span>
+		    		</div>
+		    		<div class="bonus">+{{jackpots[0].extra}} MAXMILLIONS <span class="tm">TM</span><span class="est">EST.</span>
+		    		</div>
+		    	</div>
+		    </div>
+		</div>
+	</div>
+	<div class="col-md-6">
+		<div id="six49-jackpot" class="next_draw_info parbase lotto649">
+		    <div class="draw_text">
+				<img src="{{ url_for('static', filename='files/lotto-649-jackpot-logo.png') }}" alt="Lotto MAX" class="logo">
+		       
+				<h2>Current Jackpot</h2>
+		        <div class="dyn" data-tba="TBA">
+		        	<div class="jackpot">${{jackpots[1].million}} Million <span class="est">EST.</span>
+		    		</div>
+		    		<div class="bonus">+{{jackpots[1].extra}} GUARANTEED<br> MAXMILLION PRIZE
+		    		</div>
+		    	</div>
+		    </div>
+		</div>
+	</div>
+</div>
 <div class="play-list-container">
+	{% if (play_list|length)>0%}
+	<div class="row">
+		<div class="name-column header">Name</div>
+		<div class="header">Good Luck</div>
+	</div>
+	{% endif %}
 	{% for p in play_list%}
 		<div class="row">
-			<div>{{p.name}}</div>
+			<div class="name-column">{{p.name}}</div>
 			<div>{{p.luck}}</div>
 		</div>
 	{% endfor %}
 </div>
-<form action="/" method="post">
-	<select name="id">
-		{% for u in users%}
-		<option value="{{u.id}}">{{u.name}}</option>
-		{% endfor %}
-	</select>
-	<input type="submit" value="Donate">
-</form>
+<div id="enroll-form">
+	<form action="/" method="post">
+		<span>Please Select Your Name</span>
+		<select name="id">
+			{% for u in users%}
+			<option value="{{u.id}}">{{u.name}}</option>
+			{% endfor %}
+		</select>
+		<input type="submit" value="Join">
+	</form>
+</div>
 </body>
 </html>

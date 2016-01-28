@@ -84,44 +84,30 @@ def home_page():
 			tmp = request.form['id']
 			play = Play.query.filter_by(week=current_week, user_id=tmp).first()
 			if not play:
-				play = Play(date=datetime.datetime.utcnow(), user_id=int(tmp), week=current_week, luck=random.randrange(-100, 100))
+				play = Play(date=datetime.datetime.utcnow(), user_id=int(tmp), week=current_week, luck=random.randrange(-10, 100))
 				print play
 				db.session.add(play)
 				db.session.commit()
-			# print "hello"
-			# print tmp
-		# if request.form['name']:
-		# 	tmp_name = request.form['name']
-		# 	usr = User.query.filter_by(name=tmp_name).first()
-		# 	play = Play.query.filter_by(week=current_week, user_id=usr.id).first()
-		# 	print 'hello'
-		# 	print play
-		# 	print usr
-		# 	if not play:
-		# 		play = Play(date=datetime.datetime.utcnow(), user_id=usr.id, week=current_week)
-		# 		db.session.add(play)
-		# 		db.session.commit()
-		# print Play.query.all()
 
 		return redirect(url_for('home_page'))
 	# play_list = User.query.join(Play, User.id = Play.user_id).filter(Play.week = current_week).add_columns(Users.name, Play.luck).order_by(Play.luck.desc())
 	play_list = User.query.join(Play, (User.id == Play.user_id)).filter(Play.week==current_week).add_columns(User.name, Play.luck).order_by(Play.luck.desc()).all()
 	return render_template("home.html", users=User.query.order_by(User.name.asc()).all(), jackpots=JackPot.query.all(), play=Play.query.order_by(Play.luck).all(), play_list=play_list)
 
-	Comments.query.order_by(Comments.pub_date.desc()).all()
+@app.route('/dashboard', methods=["GET", "POST"])
+def dashboard():
+	if request.method == "POST":
+		if request.form['reset']:
+			Play.query.filter_by(week=current_week).delete()
+	return render_template("dashboard.html")
 
 # print time.strftime("%x")
 
 if __name__ == '__main__':
 	# db.drop_all()
 	# db.create_all()
-	# User.query.delete()
-	# JackPot.query.delete()
-	# Play.query.delete()
 	# initUsers()
 	# initJackPot()
-	# print User.query.all()
-	# print JackPot.query.all()
 	app.run( 
         host="0.0.0.0",
         port=int("6490")

@@ -1,7 +1,84 @@
 .play-list-container{
+	margin-top: 20px;
+	text-align: center;
 	.row{
 		div{
+			width: 200px;
 			display: inline-block;
+			&.header{
+			    font-size: 1.3em;
+    			font-weight: bold;
+			}
+			&.name-column{
+				width: 100px;
+			}
 		}
+	}
+}
+#enroll-form{
+	text-align: center;
+	margin-top: 20px;
+}
+.next_draw_info.lottomax, .next_draw_info.lotto649{
+	margin-left: 60%;
+	width : 240px;
+	height: 200px;
+	border-radius: 5px;
+	text-align: center;
+	background: #4c8b0a;
+	color: #fff;
+	font-family: "omnes-pro",sans-serif;
+    background: -moz-radial-gradient(center,ellipse cover,#99bd73 0,#99bd73 17%,#4c8b0a 100%);
+    background: -webkit-gradient(radial,center center,0px,center center,100%,color-stop(0%,#99bd73),color-stop(17%,#99bd73),color-stop(100%,#4c8b0a));
+    background: -webkit-radial-gradient(center,ellipse cover,#99bd73 0,#99bd73 17%,#4c8b0a 100%);
+    background: -o-radial-gradient(center,ellipse cover,#99bd73 0,#99bd73 17%,#4c8b0a 100%);
+    background: -ms-radial-gradient(center,ellipse cover,#99bd73 0,#99bd73 17%,#4c8b0a 100%);
+    background: radial-gradient(center,ellipse cover,#99bd73 0,#99bd73 17%,#4c8b0a 100%);
+    h2{
+    	text-transform: uppercase;
+    	font-size: .875em;
+    }
+    .jackpot{
+    	font-size: 1.6em;
+		font-style: normal;
+		font-weight: 700;
+		line-height: 1.0;
+		.est{
+			font-size: .4em;
+		}
+    }
+    .bonus{
+    	font-size: 1.023em;
+	    font-style: normal;
+	    font-weight: 700;
+	    line-height: 1.0;
+	    margin: 8px 0 8px 0;
+	    .tm{
+	    	font-size: .4em;
+		    bottom: 15.4%;
+		    position: absolute;
+		    right: 20.5%;
+	    }
+	    .est{
+			font-size: .4em;
+		}
+    }
+}
+.next_draw_info.lotto649{
+	margin-left: 10%;
+    background: #214477;
+    background: -moz-radial-gradient(center,ellipse cover,#2776be 0,#2776be 17%,#214477 100%);
+    background: -webkit-gradient(radial,center center,0px,center center,100%,color-stop(0%,#2776be),color-stop(17%,#2776be),color-stop(100%,#214477));
+    background: -webkit-radial-gradient(center,ellipse cover,#2776be 0,#2776be 17%,#214477 100%);
+    background: -o-radial-gradient(center,ellipse cover,#2776be 0,#2776be 17%,#214477 100%);
+    background: -ms-radial-gradient(center,ellipse cover,#2776be 0,#2776be 17%,#214477 100%);
+    background: radial-gradient(center,ellipse cover,#2776be 0,#2776be 17%,#214477 100%);
+}
+.row{
+	overflow: auto;
+	.col-md-6{
+		width: 50%;
+		display: inline-block;
+		float: left;
 	}
 }
