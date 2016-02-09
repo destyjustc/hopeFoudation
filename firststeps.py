@@ -5,11 +5,12 @@ import random
 from pprint import pprint
 from flask import Flask, request, flash, url_for, redirect, render_template
 from flask_sqlalchemy import SQLAlchemy
+import luck
 
 app = Flask(__name__)
 app.config.from_pyfile('app.cfg')
 db = SQLAlchemy(app)
-current_week = "1"
+current_week = "3"
 
 class User(db.Model):
 	__tablename__ = 'users'
@@ -83,14 +84,16 @@ def home_page():
 		if request.form['id']:
 			tmp = request.form['id']
 			play = Play.query.filter_by(week=current_week, user_id=tmp).first()
+			user = User.query.filter_by(id=tmp).first()
 			if not play:
-				play = Play(date=datetime.datetime.utcnow(), user_id=int(tmp), week=current_week, luck=random.randrange(-10, 100))
+				play = Play(date=datetime.datetime.utcnow(), user_id=int(tmp), week=current_week, luck=luck.GetLuck(user.name))
+				print luck
 				print play
 				db.session.add(play)
 				db.session.commit()
 
 		return redirect(url_for('home_page'))
-	# play_list = User.query.join(Play, User.id = Play.user_id).filter(Play.week = current_week).add_columns(Users.name, Play.luck).order_by(Play.luck.desc())
+	# play_list = User.query.join(Play, User.idPlay.user_id).filter(Play.week = current_week).add_columns(Users.name, Play.luck).order_by(Play.luck.desc())
 	play_list = User.query.join(Play, (User.id == Play.user_id)).filter(Play.week==current_week).add_columns(User.name, Play.luck).order_by(Play.luck.desc()).all()
 	return render_template("home.html", users=User.query.order_by(User.name.asc()).all(), jackpots=JackPot.query.all(), play=Play.query.order_by(Play.luck).all(), play_list=play_list)
 
@@ -110,5 +113,5 @@ if __name__ == '__main__':
 	# initJackPot()
 	app.run( 
         host="0.0.0.0",
-        port=int("6490")
+        port=int("8888")
   )
