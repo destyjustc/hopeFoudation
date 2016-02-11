@@ -8,6 +8,7 @@
 	<link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
 	<link rel="stylesheet" href="{{ url_for('static', filename='css/semantic.min.css') }}">
 	<script type="text/javascript" src="{{ url_for('static', filename='js/semantic.min.js') }}"></script>
+	<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDBkU-0L-txqy8jc5LN-pb9BPpHHm7_cvc&callback=initMap"></script>
 </head>
 <body>
 <div class="row">
@@ -67,8 +68,20 @@
 		<input type="submit" value="Join">
 	</form>
 </div>
+<div id="map">
+</div>
 <div class="bottom-wrap row" style="text-align:center; margin-top:10px">
 	<img src="{{ url_for('static', filename='files/1379334631-3509853702.jpg') }}" alt="Lotto MAX" class="logo" style="">
 </div>
+<script type="text/javascript">
+var map;
+var markers = [{lat: 49.278255, lng:-123.124553}]
+function initMap() {
+  map = new google.maps.Map(document.getElementById('map'), {
+    center: {lat: 49.27874 , lng: -123.126386},
+    zoom: 16
+  });
+}
+</script>
 </body>
 </html>

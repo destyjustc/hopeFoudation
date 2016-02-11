@@ -87,3 +87,6 @@
   display: inline-block;
   float: left;
 }
+#map {
+  height: 500px;
+}
