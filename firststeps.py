@@ -55,6 +55,13 @@ class Play(db.Model):
 	def __repr__(self):
 		return "<Play(date='%s', user_id='%d', luck='%f')>" % (self.date, self.user_id, self.luck)
 
+class LottoStore(db.Model):
+	__tablename__ = "store"
+
+	id = db.Column(db.Integer, primary_key=True)
+	lat = db.Column(db.Float)
+	lng = db.Column(db.Float)
+	luck = db.Column(db.Float)
 
 def initJackPot():
 	Max = JackPot(name="Max", million=60, extra=25)
@@ -78,6 +85,18 @@ def initPlay():
 	db.session.add(play)
 	db.session.commit()
 
+def initStore():
+	s1 = LottoStore(lat=49.278441, lng=-123.124564)
+	s2 = LottoStore(lat=49.278334, lng=-123.124361)
+	s3 = LottoStore(lat=49.277575, lng=-123.126956)
+	s4 = LottoStore(lat=49.278411, lng=-123.128448)
+	db.session(s1)
+	db.session(s2)
+	db.session(s3)
+	db.session(s4)
+	db.session.commit()
+
+
 @app.route('/', methods=["GET", "POST"])
 def home_page():
 	if request.method == "POST":
@@ -95,6 +114,7 @@ def home_page():
 		return redirect(url_for('home_page'))
 	# play_list = User.query.join(Play, User.idPlay.user_id).filter(Play.week = current_week).add_columns(Users.name, Play.luck).order_by(Play.luck.desc())
 	play_list = User.query.join(Play, (User.id == Play.user_id)).filter(Play.week==current_week).add_columns(User.name, Play.luck).order_by(Play.luck.desc()).all()
+	plays = Play.query.all();
 	return render_template("home.html", users=User.query.order_by(User.name.asc()).all(), jackpots=JackPot.query.all(), play=Play.query.order_by(Play.luck).all(), play_list=play_list)
 
 @app.route('/dashboard', methods=["GET", "POST"])
@@ -111,6 +131,7 @@ if __name__ == '__main__':
 	# db.create_all()
 	# initUsers()
 	# initJackPot()
+	# Model.__t
 	app.run( 
         host="0.0.0.0",
         port=int("8888")
