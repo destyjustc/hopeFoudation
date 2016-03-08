@@ -45,6 +45,7 @@
 </div>
 <div class="play-list-container">
 	{% if (play_list|length)>0%}
+	{% set index = 1 %}
 	<div class="row">
 		<div class="name-column header">Name</div>
 		<div class="header">Good Luck</div>
@@ -52,8 +53,9 @@
 	{% endif %}
 	{% for p in play_list%}
 		<div class="row">
-			<div class="name-column">{{p.name}}</div>
+			<div class="name-column">{{index}}        {{p.name}}</div>
 			<div>{{p.luck}}</div>
+			{% set index = index + 1 %}
 		</div>
 	{% endfor %}
 </div>
