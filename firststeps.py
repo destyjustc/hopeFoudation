@@ -10,7 +10,7 @@ import luck
 app = Flask(__name__)
 app.config.from_pyfile('app.cfg')
 db = SQLAlchemy(app)
-current_week = "666666"
+current_week = "8"
 
 class User(db.Model):
 	__tablename__ = 'users'
