@@ -10,7 +10,7 @@ import luck
 app = Flask(__name__)
 app.config.from_pyfile('app.cfg')
 db = SQLAlchemy(app)
-current_week = "8"
+current_week = "48"
 
 class User(db.Model):
 	__tablename__ = 'users'
@@ -99,6 +99,7 @@ def initStore():
 
 @app.route('/', methods=["GET", "POST"])
 def home_page():
+	winner = luck.GetLuck('winner')
 	if request.method == "POST":
 		if request.form['id']:
 			tmp = request.form['id']
@@ -115,7 +116,7 @@ def home_page():
 	# play_list = User.query.join(Play, User.idPlay.user_id).filter(Play.week = current_week).add_columns(Users.name, Play.luck).order_by(Play.luck.desc())
 	play_list = User.query.join(Play, (User.id == Play.user_id)).filter(Play.week==current_week).add_columns(User.name, Play.luck).order_by(Play.luck.desc()).all()
 	plays = Play.query.all();
-	return render_template("home.html", users=User.query.order_by(User.name.asc()).all(), jackpots=JackPot.query.all(), play=Play.query.order_by(Play.luck).all(), play_list=play_list)
+	return render_template("home.html", users=User.query.order_by(User.name.asc()).all(), jackpots=JackPot.query.all(), play=Play.query.order_by(Play.luck).all(), play_list=play_list, winner=winner)
 
 @app.route('/dashboard', methods=["GET", "POST"])
 def dashboard():

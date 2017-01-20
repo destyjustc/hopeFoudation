@@ -7,8 +7,10 @@
 <head>
 	<link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
 	<link rel="stylesheet" href="{{ url_for('static', filename='css/semantic.min.css') }}">
+	<script type="text/javascript" src="{{ url_for('static', filename='js/jquery-3.1.1.min.js') }}"></script>
 	<script type="text/javascript" src="{{ url_for('static', filename='js/semantic.min.js') }}"></script>
-	<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDBkU-0L-txqy8jc5LN-pb9BPpHHm7_cvc&callback=initMap"></script>
+	<script type="text/javascript" src="{{ url_for('static', filename='js/roulette.js') }}"></script>
+	<script type="text/javascript" src="{{ url_for('static', filename='js/app.js') }}"></script>
 </head>
 <body>
 <div class="row">
@@ -43,7 +45,7 @@
 		</div>
 	</div>
 </div>
-<div class="play-list-container">
+<!-- <div class="play-list-container">
 	{% if (play_list|length)>0%}
 	{% set index = 1 %}
 	<div class="row">
@@ -59,7 +61,7 @@
 		</div>
 	{% endfor %}
 </div>
-<div id="enroll-form">
+ <div id="enroll-form">
 	<form action="/" method="post">
 		<span>Please Select Your Name</span>
 		<select name="id">
@@ -69,9 +71,36 @@
 		</select>
 		<input type="submit" value="Join">
 	</form>
-</div>
-<!-- <div id="map">
 </div> -->
+<div id="winner" style="display:none">{{winner}}</div>
+<div class="roulette-container" style="width:240px; margin:auto;">
+	<div>Winner of This Week:</div>
+	<div class="roulette" style="display:none;"> 
+		<img src="{{ url_for('static', filename='files/alex.png') }}"/>
+		<img src="{{ url_for('static', filename='files/behnaz.png') }}"/>
+		<img src="{{ url_for('static', filename='files/chao.png') }}"/>
+		<img src="{{ url_for('static', filename='files/eric.png') }}"/>
+		<img src="{{ url_for('static', filename='files/jing.png') }}"/>
+		<img src="{{ url_for('static', filename='files/josh.png') }}"/>
+		<img src="{{ url_for('static', filename='files/jude.png') }}"/>
+		<img src="{{ url_for('static', filename='files/kevin.png') }}"/>
+		<img src="{{ url_for('static', filename='files/laura.png') }}"/>
+		<img src="{{ url_for('static', filename='files/lei.png') }}"/>
+		<img src="{{ url_for('static', filename='files/mandeep.png') }}"/>
+		<img src="{{ url_for('static', filename='files/marko.png') }}"/>
+		<img src="{{ url_for('static', filename='files/ray.png') }}"/>
+		<img src="{{ url_for('static', filename='files/sherry.png') }}"/>
+		<img src="{{ url_for('static', filename='files/simon.png') }}"/>
+		<img src="{{ url_for('static', filename='files/steven.png') }}"/>
+		<img src="{{ url_for('static', filename='files/susan.png') }}"/>
+		<img src="{{ url_for('static', filename='files/timmy.png') }}"/>
+		<img src="{{ url_for('static', filename='files/wayne.png') }}"/>
+		<img src="{{ url_for('static', filename='files/yong.png') }}"/>
+	</div>
+	<!-- <div class="btn_container" style="padding-left:24%">
+		<button class="btn btn-large btn-primary start"> START </button>
+	</div> -->
+</div>
 <div class="bottom-wrap row" style="text-align:center; margin-top:10px">
 	<img src="{{ url_for('static', filename='files/1379334631-3509853702.jpg') }}" alt="Lotto MAX" class="logo" style="">
 </div>

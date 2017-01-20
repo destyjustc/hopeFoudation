@@ -1,7 +1,7 @@
 import hashlib
 import time
 from pprint import pprint
-
+import datetime
 
 class Lunar:
     def __init__(self, lunarYear, lunarMonth, lunarDay, isleap):
@@ -197,15 +197,15 @@ class LunarSolarConverter:
 def GetLuck(name):
     year = int(time.strftime("%Y"))
     month = int(time.strftime("%m"))
-    day = int(time.strftime("%d"))
+    today = datetime.date.today()
+    day = int(time.strftime("%d", (today - datetime.timedelta(days=today.weekday())).timetuple()))
+    print day
 
     converter = LunarSolarConverter()
     solar = Solar(year, month, day)
     lunar = converter.SolarToLunar(solar)
     result = name+" "+str(lunar.lunarYear)+" "+str(lunar.lunarMonth)+" "+str(lunar.lunarDay)
-    print result
     hash_object = hashlib.md5(result.encode())
     result = int("0x"+str(hash_object.hexdigest()),0)%110-9
-    print result
     return result
 
